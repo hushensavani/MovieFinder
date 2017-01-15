@@ -367,9 +367,4 @@ public class Movie implements Serializable {
                 ", isFoundOnOmdb=" + isFoundOnOmdb +
                 '}';
     }
-/*
-    @Override
-    public int compareTo(Object o) {
-        return (int)(imdbRating - ((Movie)o).imdbRating);
-    }*/
 }
