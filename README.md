@@ -27,5 +27,5 @@ Feel free to share your thoughts or the issues. Do share your contribution if yo
 
 [Hushen Savani](mailto:husen.savani1@gmail.com)
 
-#### Disclosure - API and Libraries used
-[The Open Movie Database](http://www.omdbapi.com/)
+#### *Disclosure - API and Libraries used*
+*[The Open Movie Database](http://www.omdbapi.com/)*
