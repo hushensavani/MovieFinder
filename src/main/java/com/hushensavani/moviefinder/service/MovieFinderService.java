@@ -33,7 +33,7 @@ public class MovieFinderService {
     }
 
     /**
-     * The Main()
+     * Main()
      */
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
@@ -58,6 +58,7 @@ public class MovieFinderService {
      */
     public static List<Movie> findMovies(String mediaRootPath) {
         Map<String, Movie> movieMap = CacheUtils.load();
+        Map<String, Movie> currentResultMap = new HashMap<>();
         List<Movie> moviesList = DirectoryScanner.getMoviesList(mediaRootPath);
         Movie movieResult = null;
 
@@ -92,13 +93,22 @@ public class MovieFinderService {
             if (movieResult!=null) { //Preparing movie map to save on local store.
                 movieResult.setPath(movie.getPath());
                 movieMap.put(movieKey, movieResult);
+                currentResultMap.put(movieKey, movieResult);
             }
         }
 
         CacheUtils.save(movieMap); //Saving movie map to local store.
 
-        //Returning sorted movies list by IMDB Rating.
-        return sortMoviesByIMDBRating(movieMap);
+        //Sorting the movies list by IMDB Rating.
+        if(currentResultMap!=null && currentResultMap.size()>0) {
+            moviesList = sortMoviesByIMDBRating(currentResultMap);
+        }
+        else {
+            moviesList.clear();
+            System.out.println("No movies are found on media path '" + mediaRootPath + "'.");
+        }
+
+        return moviesList;
     }
 
     /**
@@ -269,21 +279,24 @@ public class MovieFinderService {
      */
     private static List<Movie> sortMoviesByIMDBRating(Map<String,Movie> movieMap) {
 
-        List<Movie> moviesList = new ArrayList<>();
-        List<Map.Entry<String, Movie>> entryList = new ArrayList<Map.Entry<String, Movie>>(movieMap.entrySet());
-        Collections.sort(
-                entryList, new Comparator<Map.Entry<String, Movie>>() {
-                    @Override
-                    public int compare(Map.Entry<String, Movie> integerEmployeeEntry,
-                                       Map.Entry<String, Movie> integerEmployeeEntry2) {
-                        return new Double(integerEmployeeEntry2.getValue().getImdbRating())
-                                .compareTo(integerEmployeeEntry.getValue().getImdbRating());
+        List<Movie> moviesList = null;
+        if(movieMap!=null) {
+            moviesList = new ArrayList<>();
+            List<Map.Entry<String, Movie>> entryList = new ArrayList<Map.Entry<String, Movie>>(movieMap.entrySet());
+            Collections.sort(
+                    entryList, new Comparator<Map.Entry<String, Movie>>() {
+                        @Override
+                        public int compare(Map.Entry<String, Movie> integerEmployeeEntry,
+                                           Map.Entry<String, Movie> integerEmployeeEntry2) {
+                            return new Double(integerEmployeeEntry2.getValue().getImdbRating())
+                                    .compareTo(integerEmployeeEntry.getValue().getImdbRating());
+                        }
                     }
-                }
-        );
+            );
 
-        for (Map.Entry<String, Movie> movieRes : entryList) {
-            moviesList.add(movieRes.getValue());
+            for (Map.Entry<String, Movie> movieRes : entryList) {
+                moviesList.add(movieRes.getValue());
+            }
         }
 
         return moviesList;

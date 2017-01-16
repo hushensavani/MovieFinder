@@ -47,7 +47,7 @@ public class DirectoryScanner {
                 }
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Oops! Media scan error. Please check if 'media.root.path' property is properly configured in 'config.properties' file.");
         }
         return moviesList;
     }
