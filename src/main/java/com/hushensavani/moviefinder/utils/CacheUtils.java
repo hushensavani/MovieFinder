@@ -26,7 +26,7 @@ public class CacheUtils {
 
     /**
      * This method loads the local store.
-     * @return Map<String, Movie> - Map containg movies data saved on local store.
+     * @return Map<String, Movie> - Map containing movies data saved on local store.
      */
     public static Map<String, Movie> load() {
 
