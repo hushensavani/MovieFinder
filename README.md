@@ -4,7 +4,7 @@ Finds movies on your storage media such as HDD, pen drive, memory card, mobile s
 ![MovieFinder](https://cloud.githubusercontent.com/assets/1409894/21982369/fde7245c-dc11-11e6-89e5-f381734f2675.png)
 
 ### Prerequisites
-Clone this project and load in your favorite IDE as Maven project. Before you run the project, you need to insert your storage media in your computer and then provide your storage media directory path for which you want to scan the movies, as specified in configuration section.
+Clone this project and load in your favorite IDE as Gradle project. Before you run the project, you need to insert your storage media in your computer and then provide your storage media directory path for which you want to scan the movies, as specified in configuration section.
 
 ![Media Path](https://cloud.githubusercontent.com/assets/1409894/21981996/377d2970-dc10-11e6-8c2c-1b82045b54cc.png)
 
