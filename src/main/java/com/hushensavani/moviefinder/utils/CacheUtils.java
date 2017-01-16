@@ -35,7 +35,7 @@ public class CacheUtils {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(cacheDBPath))) {
            movieMap = (Map<String, Movie>)ois.readObject();
         } catch (Exception e) {
-            System.err.println("Oops! Cannot load local store from the specified location.");
+            System.out.println("No local store is found at the specified location. Seems you are running the program for the first time!");
         }
 
         return movieMap;
